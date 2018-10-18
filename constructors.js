@@ -57,16 +57,20 @@ mustang.moveCar(); // Increments mustang' move property by 10. Returns the new m
 */
 
 function Car(make, model, year){
-  this.make = make;
-  this.model = model;
-  this.year = year;
-  this.move = 0;
-
-  function moveCar(){
-    this.move += 10;
-    // return this.move;
-  }
-return moveCar();
+    this.make = make;
+    this.model = model;
+    this.year = year;
+    let move = 0;
+  
+    this.moveCar = function(){
+      return move += 10;
+      // return this.move;
+    }
+// return moveCar();
 }// Code here
+
+
+
+
 
 
