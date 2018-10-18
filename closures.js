@@ -22,13 +22,13 @@ function outer() {
   Invoke outer saving the return value into another variable called 'inner'.
 */
   
-// Code Here
+var inner = outer();// Code Here
 
 
 
 //Once you do that, invoke inner.
 
-//Code Here
+inner();//Code Here
 
 
 
@@ -51,7 +51,8 @@ function callFriend(name) {
   (HINT: You will need to pass in arguments to both function invocations)
 */
 
-//Code Here
+var callJake = callFriend("Jake");
+callJake.dial(435-555-9248);//Code Here
 
 
 
@@ -60,17 +61,22 @@ function callFriend(name) {
 /*
   Write a function called makeCounter that makes the following code work properly.
 */
+function makeCounter() {
+  var n = 0;
+  return function() {
+    n++;
+    return n;
+  }
+};//Code Here
 
-//Code Here
 
 
-
-//Uncomment this once you make your function
-//   var count = makeCounter();
-//   count(); // 1
-//   count(); // 2
-//   count(); // 3
-//   count(); // 4
+// Uncomment this once you make your function
+  var count = makeCounter();
+  count(); // 1
+  count(); // 2
+  count(); // 3
+  count(); // 4
 
 
 
@@ -85,19 +91,26 @@ function callFriend(name) {
   http://stackoverflow.com/questions/17776940/javascript-module-pattern-with-example?answertab=votes#tab-top
 */
 
-function counterFactory(value) {
-  // Code here.
-
+function counterFactory(num) {
   return {
-
-  };
+    
+     inc(){
+      num += 1;
+      return num;
+    },
+  
+     dec(){
+      num -= 1;
+      return num;
+    }// Code here.
+  }
 }
 
-counter = counterFactory(10);
-// counter.inc() // 11
-// counter.inc() // 12
-// counter.inc() // 13
-// counter.dec() // 12
+var counter = counterFactory(10);
+counter.inc(); // 11
+counter.inc(); // 12
+counter.inc(); // 13
+counter.dec(); // 12
 
 
 
@@ -112,13 +125,16 @@ counter = counterFactory(10);
 function motivation( firstname, lastname ) {
   var welcomeText = "You're doing awesome, keep it up";
 
-  // code message function here.
+  function message() {
+    welcomeText + ' ' + firstname + ' ' + lastname
+  }// code message function here.
 
   //Uncommment this to return the value of your message function
-  //return message;
+  return message;
 }
 
-var greeting = motivation('Billy', 'Bob'); // 'You're doing awesome keep it up Billy Bob.
+var greeting = motivation('Billy', 'Bob');
+// 'You're doing awesome keep it up Billy Bob.
 
 
 
@@ -140,12 +156,17 @@ var module = (function() {
     return "Hi, I'm " + person.name + ", age " + person.age + " from " + person.location;
   }
 
+
+
   // Anything that is being returned is made public and can be invoked from
   // outside our lexical scope
-  return {
+  return {  publicMethod: function(privateMethod){;
+  }
     // Code here.
   };
 })();
+
+module.publicMethod();
 
 
 
@@ -162,7 +183,15 @@ function secretNumber() {
   var secret = 143;
 
   return {
-    // Code here
+    addToSecret: function(val){
+      secret += val;
+      return secret;
+    },
+    
+    takeAwayFromSecret: function(val){
+      secret -= val;
+      return secret
+    }// Code here
   };
 }
 
@@ -187,7 +216,9 @@ function secretNumber() {
 */
 
 function timeOutCounter() {
+  var time = 0;
   for (var i = 0; i <= 5; i++) {
+    time += i;
     setTimeout(function() {
       console.log(i);
     }, i * 1000);
